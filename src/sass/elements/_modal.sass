@@ -1,0 +1,88 @@
+// Styles for dialog window
+.mfp-wrap
+  -webkit-overflow-scrolling: touch
+  -webkit-transform: translateZ(0)
+
+html.mfp-helper
+  height: 100%
+  body
+    overflow: hidden
+    height: 100%
+    -webkit-transform: translateZ(0)
+
+.popup-dialog
+  max-width: 420px
+  margin: 40px auto
+  position: relative
+  padding: 100px 20px 30px 20px
+  text-align: left
+  background: $colorOrange
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.15)
+  border-radius: 32px
+  .ui-checkbox
+    color: #fff
+  .mfp-close
+    background: white
+    border-radius: 50%
+    opacity: 1
+    size: 55px
+    top: 20px
+    right: 20px
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10)
+    color: $colorPrimary
+    font-size: 50px
+    +tr
+    &:hover
+      box-shadow: none
+      opacity: .7
+
+.popup-form
+  &__cta
+    margin-top: 30px
+    text-align: center
+    .btn
+      padding: 15px 30px
+
+// Fade-zoom animation for first dialog
+
+.popup-buble
+  .popup-dialog
+    opacity: 0
+    transition: all 0.2s ease-in-out
+    transform: scale(0.8)
+  &.mfp-ready .popup-dialog
+    opacity: 1
+    transform: scale(1)
+  &.mfp-removing .popup-dialog
+    transform: scale(0.8)
+    opacity: 0
+  &.mfp-bg
+    background: rgba($colorPrimary, .5)
+    opacity: 0
+    transition: opacity 0.3s $ease
+  &.mfp-ready.mfp-bg
+    opacity: 1
+  &.mfp-removing.mfp-bg
+    opacity: 0
+
+
+
+// Fade-move animation
+.my-mfp-slide-bottom
+  .zoom-anim-dialog
+    opacity: 0
+    transition: all 0.2s ease-out
+    transform: translateY(-20px) perspective(600px) rotateX(10deg)
+  &.mfp-ready .zoom-anim-dialog
+    opacity: 1
+    transform: translateY(0) perspective(600px) rotateX(0)
+  &.mfp-removing .zoom-anim-dialog
+    opacity: 0
+    transform: translateY(-10px) perspective(600px) rotateX(10deg)
+  &.mfp-bg
+    opacity: 0
+    transition: opacity 0.3s ease-out
+  &.mfp-ready.mfp-bg
+    opacity: 0.8
+  &.mfp-removing.mfp-bg
+    opacity: 0

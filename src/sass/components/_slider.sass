@@ -1,0 +1,247 @@
+/* slider
+.slider
+  position: absolute 0
+  z-index: 1
+  &.dark-over
+    .slider-slide
+      &:after
+        content: ''
+        position: absolute
+        z-index: 1
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: rgba(0,0,0,.45)
+  &-slide
+    position: relative
+    height: 100vh
+    min-height: 500px
+    overflow:  hidden
+
+    &__mobile-logo
+      display: none
+      align-items: center
+      justify-content: center
+      position: absolute
+      z-index: 5
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      size: 200px
+      background: white
+      background: white
+      padding-left: 10px
+      padding-right: 10px
+      border-radius: 50%
+      &::after, &::before
+        display: inline-block
+        content: ' '
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        height: 2px
+        background: white
+        width: 50vw
+      &::before
+        left: calc(-50vw - 25px)
+      &::after
+        right: calc(-50vw - 25px)
+      img
+        max-width: 100%
+
++r(500)
+  .slider
+    &-slide
+      height: auto
+      min-height: 100vh
+
++r($desktop)
+  .slider
+    &-slide
+      height: auto
+      min-height: 100vh
+      overflow: hidden
+
++r($tablet)
+  .slider-slide
+    &__mobile-logo
+      display: flex
+
+
+/* controls
+.slider-controls
+  position: absolute
+  z-index: 5
+  bottom: 120px
+  left: 50%
+  transform: translateX(-50%)
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 100%
+  max-width: 900px
+  pointer-events: none
+  &--orange
+    .slider-control
+      &::after
+        background-color: $colorOrange
+      &__dot
+        &::after, &::before
+          background-color: $colorOrange
+      &.is-active
+        .slider-control__dot
+          background-color: $colorOrange
+
+.slider-control
+  position: relative
+  flex: 0 0 20%
+  display: flex
+  flex-direction: column
+  align-items: center
+  padding: 0 10px
+  height: 180px
+  &::after
+    display: inline-block
+    content: ' '
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%,-50%)
+    background: white
+    size: 23px
+    border-radius: 50%
+    +tr
+  &__dot
+    position: absolute
+    z-index: 2
+    left: 50%
+    top: 50%
+    transform: translate(-50%,-50%)
+    display: flex
+    justify-content: center
+    align-items: center
+    // size: 23px
+    width: 100%
+    height: 100%
+    padding-left: 10px
+    padding-right: 10px
+    margin-top: auto
+    margin-bottom: auto
+    // background: white
+    border-radius: 50%
+    overflow: visible
+    cursor: pointer
+    pointer-events: all
+    +tr
+    &::after, &::before
+      position: absolute
+      z-index: 1
+      top: 50%
+      transform: translateY(-50%)
+      display: inline-block
+      content: ' '
+      background: white
+      height: 2px
+    &::after
+      left: calc(50% + 25px)
+      right: -5px
+    &::before
+      right: calc(50% + 25px)
+      left: -5px
+
+  &:first-child
+    .slider-control__dot
+      &::before
+        display: none
+  &:last-child
+    .slider-control__dot
+      &::after
+        display: none
+
+  img
+    position: relative
+    z-index: 3
+    max-width: 100%
+    opacity: 0
+    transform: scale(0)
+    +tr
+  &.is-active
+    .slider-control__dot
+      size: 180px
+      background: white
+    img
+      opacity: 1
+      transform: scale(1)
+  &:hover
+    &::after
+      opacity: .7
+
+
++r($desktop)
+  .slider-controls
+    max-width: 700px
+  .slider-control
+    height: 140px
+    &.is-active
+      .slider-control__dot
+        size: 140px
+
++r($tablet)
+  .slider-controls
+    max-width: 500px
+    bottom: 100px
+
+  .slider-control
+    height: 100px
+    &::after
+      size: 15px
+    .slider-control__dot
+      &::after
+        left: calc(50% + 15px)
+      &::before
+        right: calc(50% + 15px)
+    &.is-active
+      .slider-control__dot
+        size: 100px
+
++r($mobile)
+  .slider-controls
+    max-width: 500px
+    bottom: 100px
+
+
+  .slider-control
+    height: 80px
+    &::after
+      size: 12px
+      background-color: $colorOrange
+    .slider-control__dot
+      &::after, &::before
+        background-color: $colorOrange
+      &::after
+        left: calc(50% + 10px)
+      &::before
+        right: calc(50% + 10px)
+    &.is-active
+      &::after
+        background-color: white
+      .slider-control__dot
+        size: 80px
+        background: transparent
+      img
+        opacity: 0
+
+  .slider-controls
+    &--orange
+      .slider-control
+        &::after
+          background-color: $fontColor
+        &__dot
+          &::after, &::before
+            background-color: $fontColor
+        &.is-active
+          .slider-control__dot
+            background-color: transparent
+          &::after
+            background-color: $colorOrange

@@ -1,0 +1,177 @@
+$sprite: (
+	arrow-down: (
+		offset-x: -205px,
+		offset-y: -96px,
+		width: 23px,
+		height: 26px,
+		total-width: 245px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	benefits-1: (
+		offset-x: -133px,
+		offset-y: 0px,
+		width: 62px,
+		height: 43px,
+		total-width: 245px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	benefits-2: (
+		offset-x: -205px,
+		offset-y: 0px,
+		width: 40px,
+		height: 38px,
+		total-width: 245px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	benefits-3: (
+		offset-x: 0px,
+		offset-y: -132px,
+		width: 90px,
+		height: 26px,
+		total-width: 245px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	benefits-4: (
+		offset-x: -205px,
+		offset-y: -48px,
+		width: 32px,
+		height: 38px,
+		total-width: 245px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	fond-1: (
+		offset-x: -67px,
+		offset-y: 0px,
+		width: 56px,
+		height: 56px,
+		total-width: 245px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	fond-2: (
+		offset-x: 0px,
+		offset-y: -66px,
+		width: 56px,
+		height: 56px,
+		total-width: 245px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	fond-3: (
+		offset-x: 0px,
+		offset-y: 0px,
+		width: 57px,
+		height: 56px,
+		total-width: 245px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	scrolldown-dark: (
+		offset-x: -133px,
+		offset-y: -53px,
+		width: 49px,
+		height: 48px,
+		total-width: 245px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+	scrolldown: (
+		offset-x: -66px,
+		offset-y: -66px,
+		width: 49px,
+		height: 48px,
+		total-width: 245px,
+		total-height: 158px,
+		image: '../img/sprite.png'
+	),
+);
+
+
+@mixin sprite-size($image) {
+	background-size: map-get(map-get($sprite, $image), 'total-width') map-get(map-get($sprite, $image), 'total-height');
+}
+
+@mixin sprite-width($image) {
+	width: map-get(map-get($sprite, $image), 'width');
+}
+
+@mixin sprite-height($image) {
+	height: map-get(map-get($sprite, $image), 'height');
+}
+
+@mixin sprite-position($image) {
+	background-position: map-get(map-get($sprite, $image), 'offset-x') map-get(map-get($sprite, $image), 'offset-y');
+}
+
+@mixin sprite-image($image) {
+	background-image: url(map-get(map-get($sprite, $image), 'image'));
+}
+
+@mixin sprite-image-retina($image) {
+	$image-path: map-get(map-get($sprite, $image), 'image');
+	$image-path-retina: str-slice($image-path, 1, str-index($image-path, '.png') - 1) + '@2x.png';
+
+	background-image: url($image-path-retina);
+}
+
+@mixin sprite($image, $size: true) {
+	@include sprite-image($image);
+	@include sprite-position($image);
+	background-repeat: no-repeat;
+
+	@if $size {
+		@include sprite-width($image);
+		@include sprite-height($image);
+	}
+
+	@media
+		only screen and (-webkit-min-device-pixel-ratio: 2),
+		only screen and (   min--moz-device-pixel-ratio: 2),
+		only screen and (     -o-min-device-pixel-ratio: 2/1),
+		only screen and (        min-device-pixel-ratio: 2),
+		only screen and (                min-resolution: 192dpi),
+		only screen and (                min-resolution: 2dppx) {
+
+		@include sprite-size($image);
+		@include sprite-image-retina($image);
+
+	}
+}
+
+
+
+	.icon-arrow-down {
+		@include sprite(arrow-down)
+	}
+	.icon-benefits-1 {
+		@include sprite(benefits-1)
+	}
+	.icon-benefits-2 {
+		@include sprite(benefits-2)
+	}
+	.icon-benefits-3 {
+		@include sprite(benefits-3)
+	}
+	.icon-benefits-4 {
+		@include sprite(benefits-4)
+	}
+	.icon-fond-1 {
+		@include sprite(fond-1)
+	}
+	.icon-fond-2 {
+		@include sprite(fond-2)
+	}
+	.icon-fond-3 {
+		@include sprite(fond-3)
+	}
+	.icon-scrolldown-dark {
+		@include sprite(scrolldown-dark)
+	}
+	.icon-scrolldown {
+		@include sprite(scrolldown)
+	}
